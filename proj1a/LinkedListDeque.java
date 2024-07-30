@@ -64,7 +64,7 @@ public class LinkedListDeque <T> {
         size++;
     }
 
-    public void removeFirst() {
+    public T removeFirst() {
         Node<T> firstnode = sentinel.next;
 
         /* next direction */
@@ -73,11 +73,38 @@ public class LinkedListDeque <T> {
         sentinel.next.prev = sentinel;
 
         size--;
+        return firstnode.element;
+    }
+
+    public T removeLast() {
+        /* get the last node */
+        Node<T> lastnode = sentinel.prev;
+
+        /* next direction */
+        lastnode.prev.next = null;
+        /* prev direction */
+        sentinel.prev = lastnode.prev;
+
+        size--;
+        return lastnode.element;
     }
 
     /* return size of linkedlist */
     public int size() {
         return size;
+    }
+
+    /* return element at the given index */
+    public T get(int index) {
+        if (index > this.size() - 1) return null;
+        int cnt = 0;  // initial state: index position
+        Node<T> node = sentinel.next;  // initial state : node
+        while (cnt < index) { // reach to desired state
+            node = node.next;
+            cnt++;
+        }
+
+        return node.element;
     }
 
     /* print all elements in the list */

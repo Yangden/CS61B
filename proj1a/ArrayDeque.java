@@ -9,6 +9,9 @@ public class ArrayDeque<T> {
         last = 4;
     }
 
+    // get size of list
+    public int size() {return size;}
+
     // check whether
     private boolean check_full() {
         if (size == list.length) {

@@ -1,4 +1,4 @@
-public class LinkedListDeque <T> {
+public class LinkedListDeque<T> {
     /* nest class : naked linklist structure */
     private class Node<T> {
         public T element;
@@ -13,7 +13,8 @@ public class LinkedListDeque <T> {
             this.element = element;
         }
     }
-    private Node<T> sentinel;
+
+    private final Node<T> sentinel;
     private int size;
 
     public LinkedListDeque() {
@@ -24,16 +25,13 @@ public class LinkedListDeque <T> {
     }
 
     public boolean isEmpty() {
-        if (sentinel.prev == sentinel) {
-            return true;
-        } else {
-            return false;
-        }
+        return sentinel.prev == sentinel;
     }
 
     /* add the element at the front of the list */
     public void addFirst(T element) {
         Node<T> newnode = new Node<>(element);
+
         /* First resolving 'prev' direction */
         if (this.isEmpty()) {
             sentinel.prev = newnode;
@@ -41,24 +39,25 @@ public class LinkedListDeque <T> {
             sentinel.next.prev = newnode;
         }
         newnode.prev = sentinel;
+
         /* resolving 'next' direction */
         newnode.next = sentinel.next;
         sentinel.next = newnode;
 
-        size ++;
+        size++;
 
     }
 
     public void addLast(T element) {
-        Node<T> org_last = sentinel.prev;
+        Node<T> orgLast = sentinel.prev;
         Node<T> newnode = new Node<>(element);
 
         /* 'next' direction */
-        org_last.next = newnode;
+        orgLast.next = newnode;
         newnode.next = sentinel;
 
         /* 'prev' direction */
-        newnode.prev = org_last;
+        newnode.prev = orgLast;
         sentinel.prev = newnode;
 
         size++;
@@ -105,6 +104,18 @@ public class LinkedListDeque <T> {
         }
 
         return node.element;
+    }
+
+    /* recursive version of get() */
+    public T getRecursive(int index) {
+        return recursive_call(sentinel.next, index);
+    }
+
+    /* recursive helper function for getRecursive() */
+    private T recursive_call(Node<T> node, int cnt) {
+        if (cnt == 0) return node.element;
+        cnt--;
+        return recursive_call(node.next, cnt);
     }
 
     /* print all elements in the list */

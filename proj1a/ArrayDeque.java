@@ -3,22 +3,23 @@ public class ArrayDeque<T> {
     private int size, front, last;
 
     public ArrayDeque() {
-        list = (T[]) new Object[1000];
+        list = (T[]) new Object[10];
         size = 0;
         front = 3;
         last = 4;
     }
 
     // get size of list
-    public int size() {return size;}
+    public int size() {
+        return size;
+    }
 
     // check whether
-    private boolean check_full() {
+    private boolean checkFull() {
         if (size == list.length) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     private void resize(int capacity) {
@@ -51,7 +52,7 @@ public class ArrayDeque<T> {
 
     // add element at the last
     public void addLast(T element) {
-        if (check_full()) { // control the growth of size
+        if (checkFull()) { // control the growth of size
             resize(size * 2);
         }
         list[last] = element;
@@ -61,7 +62,7 @@ public class ArrayDeque<T> {
 
     // add element at the front
     public void addFirst(T element) {
-        if (check_full()) { // resizing
+        if (checkFull()) { // resizing
             resize(size * 2);
         }
         list[front] = element;
@@ -73,13 +74,21 @@ public class ArrayDeque<T> {
     }
 
     // Motivation behind using array
-    public T get(int i) {
-        return list[i];
+    public T get(int index) {
+        if (index > size - 1) {
+            return null;
+        }
+
+        int pos = (front + 1) % list.length;
+        int cnt = 0;
+        while (cnt < index) {
+            pos++;
+            if (pos == list.length) pos = 0;
+            cnt++;
+        }
+        return list[pos];
     }
 
-    public T getLast() {
-        return list[size - 1];
-    }
 
     // remove last element - delete
     public T removeLast() {
@@ -90,12 +99,14 @@ public class ArrayDeque<T> {
         size--;
         return list[last];
     }
+
     // remove first element - delete
     public T removeFirst() {
         front = (front + 1) % list.length;
         size--;
         return list[front];
     }
+
     // determine if deque is empty
     public boolean isEmpty() {
         if (size == 0) {
@@ -106,22 +117,22 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int begin_front = (front + 1) % list.length;
-        int end_last = last - 1;
-        if (end_last < 0) {
-            end_last = list.length - 1;
-        }
+        int cnt = 0;
+        int pos = (front + 1) % list.length;
 
-        int end = (begin_front < end_last)?end_last: list.length - 1;
-        for (int i = begin_front; i <= end; i++) {
-            System.out.println(list[i] + " ");
+        while (cnt < size) {
+            System.out.println(list[pos] + " ");
+            pos++;
+            if (pos == list.length) {
+                pos = 0;
+            }
+            cnt++;
         }
-        if (end == end_last) {
-            return;
-        }
-        for (int i = 0; i <= end_last; i++) {
-            System.out.println(list[i] + " ");
-        }
+    }
+
+    // debugging functions
+    public int getFront() {
+        return front;
     }
 }
 

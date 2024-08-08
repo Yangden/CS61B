@@ -64,6 +64,11 @@ public class LinkedListDeque<T> {
     }
 
     public T removeFirst() {
+        /* check list empty? */
+        if (this.isEmpty()) {
+            return null;
+        }
+
         Node<T> firstnode = sentinel.next;
 
         /* next direction */
@@ -76,6 +81,10 @@ public class LinkedListDeque<T> {
     }
 
     public T removeLast() {
+        if (this.isEmpty()) {
+            return null;
+        }
+
         /* get the last node */
         Node<T> lastnode = sentinel.prev;
 
@@ -89,13 +98,17 @@ public class LinkedListDeque<T> {
     }
 
     /* return size of linkedlist */
-    public int size() {
+    public int size()
+    {
         return size;
     }
 
     /* return element at the given index */
     public T get(int index) {
-        if (index > this.size() - 1) return null;
+        if (index > this.size() - 1 || this.isEmpty()){
+            return null;
+        }
+
         int cnt = 0;  // initial state: index position
         Node<T> node = sentinel.next;  // initial state : node
         while (cnt < index) { // reach to desired state
@@ -108,6 +121,10 @@ public class LinkedListDeque<T> {
 
     /* recursive version of get() */
     public T getRecursive(int index) {
+        if (this.isEmpty() || index > size - 1) {
+            return null;
+        }
+
         return recursive_call(sentinel.next, index);
     }
 

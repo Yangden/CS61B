@@ -130,9 +130,5 @@ public class ArrayDeque<T> {
         }
     }
 
-    // debugging functions
-    public int getFront() {
-        return front;
-    }
 }
 

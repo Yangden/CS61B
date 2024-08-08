@@ -6,8 +6,15 @@ public class ArrayDequeTest {
         //int return_val = adt.getFront();
         System.out.println(return_val);
     }
+
+    public static void AddandGetTest(ArrayDeque<Integer> adt, int n) {
+        for (int i = 0; i < n; i++) {
+            adt.addLast(i);
+        }
+    }
     public static void main(String[] args) {
         ArrayDeque<Integer> adt = new ArrayDeque<>();
-        get_test(adt, 0);
+        AddandGetTest(adt, 10);
+        System.out.println(adt.get(4));
     }
 }

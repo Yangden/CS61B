@@ -76,7 +76,7 @@ public class ArrayDeque<T> {
 
     // Motivation behind using array
     public T get(int index) {
-        if (index > size - 1) {
+        if (index > size - 1 || this.isEmpty()) {
             return null;
         }
 
@@ -93,6 +93,10 @@ public class ArrayDeque<T> {
 
     // remove last element - delete
     public T removeLast() {
+        if (this.isEmpty()) {
+            return null;
+        }
+
         last--;
         if (last < 0) {
             last = list.length - 1;
@@ -103,6 +107,10 @@ public class ArrayDeque<T> {
 
     // remove first element - delete
     public T removeFirst() {
+        if (this.isEmpty()) {
+            return null;
+        }
+
         front = (front + 1) % list.length;
         size--;
         return list[front];

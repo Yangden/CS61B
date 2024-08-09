@@ -7,14 +7,14 @@ public class ArrayDequeTest {
         System.out.println(return_val);
     }
 
-    public static void AddandGetTest(ArrayDeque<Integer> adt, int n) {
+    public static void AddandGetTest(LinkedListDeque<Integer> ldt, int n) {
         for (int i = 0; i < n; i++) {
-            adt.addLast(i);
+            ldt.addLast(i);
         }
     }
     public static void main(String[] args) {
-        ArrayDeque<Integer> adt = new ArrayDeque<>();
-        AddandGetTest(adt, 10);
-        System.out.println(adt.get(4));
+        LinkedListDeque<Integer> ldt = new LinkedListDeque<>();
+        AddandGetTest(ldt, 10);
+        System.out.println(ldt.get(4)); // 0 1 2 3 4
     }
 }

@@ -74,7 +74,11 @@ public class LinkedListDeque<T> {
         /* next direction */
         sentinel.next = firstnode.next;
         /* prev direction */
-        sentinel.next.prev = sentinel;
+        if (firstnode.next == null) { // handle corner case : delete become emptu
+            sentinel.prev = sentinel;
+        } else {
+            sentinel.next.prev = sentinel;
+        }
 
         size--;
         return firstnode.element;

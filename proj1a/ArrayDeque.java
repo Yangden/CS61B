@@ -32,12 +32,12 @@ public class ArrayDeque<T> {
             newlist[j] = list[i];
             j++;
         }
-        front = newlist.length - 1;
 
         // corner case : front/last at two ends
         if (front == list.length - 1 && last == 0) {
-            list = newlist;
             last = list.length;
+            front = newlist.length - 1;
+            list = newlist;
             return;
         }
 
@@ -46,7 +46,8 @@ public class ArrayDeque<T> {
             newlist[j] = list[i];
             j++;
         }
-
+        front = newlist.length - 1;
+        last = list.length;
         list = newlist;
     }
 

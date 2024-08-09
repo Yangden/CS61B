@@ -12,9 +12,33 @@ public class ArrayDequeTest {
             ldt.addLast(i);
         }
     }
+
+    public static void Resize(ArrayDeque<Integer> adt) {
+        for (int i = 0; i < 20; i++) {
+            adt.addLast(i);
+        }
+    }
+
+    public static void GetRemove(ArrayDeque<Integer> adt) {
+        for (int i = 0; i < 20; i++) {
+            int element = adt.removeFirst();
+            System.out.println("Remove:" + ' ' + element + "\n");
+            System.out.println("Get:" + ' ' + adt.get(2) + "\n");
+        }
+    }
+
+    public static void AddFirstRemoveLast(ArrayDeque<Integer> adt) {
+        for (int i = 0; i < 20; i++) {
+            adt.addFirst(i);
+        }
+        for (int i = 0; i < 20; i++) {
+            int element = adt.removeLast();
+            System.out.println(element + "\n");
+        }
+    }
+
     public static void main(String[] args) {
-        LinkedListDeque<Integer> ldt = new LinkedListDeque<>();
-        AddandGetTest(ldt, 10);
-        System.out.println(ldt.get(4)); // 0 1 2 3 4
+        ArrayDeque<Integer> adt = new ArrayDeque<>();
+        AddFirstRemoveLast(adt);
     }
 }
